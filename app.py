@@ -28,6 +28,7 @@ def carrega_imagem():
     
     image = np.array(image, dtype=np.float32)
     image = image / 255.0
+    image = np.expand_dims(image,axis=0)
     
     return image    
 #---------------------------------------------------------------------------------------
