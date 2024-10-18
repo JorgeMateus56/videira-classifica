@@ -37,13 +37,13 @@ def main():
     page_icon=" "
   )
 
-st.write("# Classifica Folhas de Videira!")
+  st.write("# Classifica Folhas de Videira!")
 
   # Carrega modelo
-interpreter = carrega_modelo()
+  interpreter = carrega_modelo()
 
   # Carrega imagem
-image = carrega_imagem()
+  image = carrega_imagem()
 
   # Classifica
 
