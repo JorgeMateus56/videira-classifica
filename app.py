@@ -1,6 +1,10 @@
 import streamlit as st
 import gdown
 import tensorflow as tf
+import io
+from PIL import Image
+import numpy as np
+
 @st.cache_resource
 #---------------------------------------------------------------------------------------
 def carrega_modelo():
@@ -13,6 +17,20 @@ def carrega_modelo():
   
   return interpreter
 #---------------------------------------------------------------------------------------
+def carrega_imagem():
+  uploaded_file = st.file_uploader('Arraste e solte uma imagem aqui ou clique para selecionar uma', type=['png','jpg','jpeg'])
+  if uploaded_file is not None:
+    image_data = uploaded_file.read()
+    image = Image.open(io.BytesIO(image_data))
+
+    st.image(image)
+    st.success('Imagem carregada com sucesso')
+    
+    image = np.array(image, dtype=np.float32)
+    image = image / 255.0
+    
+    return image    
+#---------------------------------------------------------------------------------------
 def main():
   st.set_page_config(
     page_title="Classifica Folhas de Videira",
@@ -22,10 +40,13 @@ def main():
 st.write("# Classifica Folhas de Videira!")
 
   # Carrega modelo
+interpreter = carrega_modelo()
 
   # Carrega imagem
+image = carrega_imagem()
 
   # Classifica
+
 #--------------------------------------------------------------------------------------
 
 if __name__==__main__:
